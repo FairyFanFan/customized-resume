@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Resume Generator / 简历生成器
 
-## Getting Started
+A modern resume generation website based on Next.js + React, helping users quickly create professional resumes.
 
-First, run the development server:
+一个基于 Next.js + React 的现代化简历生成网站，帮助用户快速创建专业的简历。
+
+---
+
+## Features / 功能特性
+
+- 📝 **Smart Form / 智能表单** - Step-by-step form for personal info, work experience, education, etc. / 分步骤填写个人信息、工作经历、教育背景等
+- 👀 **Real-time Preview / 实时预览** - Instant resume preview with WYSIWYG / 即时查看简历效果，所见即所得
+- 📄 **Multi-format Export / 多格式导出** - Export as PDF and PNG image formats / 支持导出为PDF和PNG图片格式
+- 🎨 **Modern Design / 现代设计** - Clean and beautiful interface with responsive layout / 简洁美观的界面设计，响应式布局
+- ⚡ **Quick Generation / 快速生成** - Generate professional resumes based on templates / 基于模板快速生成专业简历
+
+## Tech Stack / 技术栈
+
+- **Frontend Framework / 前端框架**: Next.js 15 + React 18
+- **Styling / 样式**: Tailwind CSS
+- **Form Handling / 表单处理**: React Hook Form + Zod
+- **Icons / 图标**: Lucide React
+- **PDF Generation / PDF生成**: jsPDF + html2canvas
+- **Type Checking / 类型检查**: TypeScript
+
+## Quick Start / 快速开始
+
+### Install Dependencies / 安装依赖
+
+```bash
+npm install
+```
+
+### Start Development Server / 启动开发服务器
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+打开 [http://localhost:3000](http://localhost:3000) 查看应用。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build for Production / 构建生产版本
 
-## Learn More
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure / 项目结构
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/                 # Next.js App Router
+│   ├── globals.css     # Global styles / 全局样式
+│   ├── layout.tsx      # Root layout / 根布局
+│   └── page.tsx        # Main page / 主页面
+├── components/         # React components / React 组件
+│   ├── Header.tsx      # Navigation header / 导航头部
+│   ├── ResumeForm.tsx  # Resume form / 简历表单
+│   ├── ResumePreview.tsx # Resume preview / 简历预览
+│   └── ExportResume.tsx # Export functionality / 导出功能
+└── types/              # TypeScript type definitions / TypeScript 类型定义
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage Instructions / 使用说明
 
-## Deploy on Vercel
+1. **Fill Information / 填写信息** - Fill in personal info, work experience, education, etc. on the form page / 在表单页面填写个人信息、工作经历、教育背景等
+2. **Preview Resume / 预览简历** - Switch to preview page to view resume effect / 切换到预览页面查看简历效果
+3. **Export Resume / 导出简历** - Choose PDF or image format to export resume / 选择PDF或图片格式导出简历
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Resume Template / 简历模板
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The resume adopts a modern design style, including the following sections:
+
+简历采用现代化的设计风格，包含以下部分：
+
+- Personal Information (name, contact info, social media links) / 个人信息（姓名、联系方式、社交媒体链接）
+- Personal Summary / 个人简介
+- Work Experience / 工作经历
+- Education Background / 教育背景
+- Skills Tags / 技能标签
+- Project Experience / 项目经历
+
+## Development Notes / 开发说明
+
+### Adding New Resume Fields / 添加新的简历字段
+
+1. Update form schema in `ResumeForm.tsx` / 在 `ResumeForm.tsx` 中更新表单schema
+2. Add corresponding display logic in `ResumePreview.tsx` / 在 `ResumePreview.tsx` 中添加对应的显示逻辑
+3. Update export template in `ExportResume.tsx` / 在 `ExportResume.tsx` 中更新导出模板
+
+### Customizing Styles / 自定义样式
+
+The project uses Tailwind CSS. You can customize styles by modifying component classes in `globals.css`.
+
+项目使用 Tailwind CSS，可以通过修改 `globals.css` 中的组件类来自定义样式。
+
+## License / 许可证
+
+MIT License
