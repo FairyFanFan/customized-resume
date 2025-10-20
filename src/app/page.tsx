@@ -74,19 +74,19 @@ export default function Home() {
       <Header activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="px-4 pb-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="flex flex-col md:flex-row gap-8">
             {/* 左侧：操作按钮区域 */}
-            <div className="lg:col-span-1">
-              <div className="glass-card p-6 sticky top-8">
+            {/* <div className="w-full md:w-1/4">
+              <div className="glass-card p-6 sticky top-8 flex">
                 <h2 className="text-xl font-semibold text-white mb-6 flex items-center">
                   <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full mr-3"></div>
                   操作面板
                 </h2>
                 
-                <div className="space-y-4">
+                <div className="space-y-4 flex gap-4">
                   <button
                     onClick={() => setActiveTab('form')}
-                    className={`w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    className={`w-1/10 flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                       activeTab === 'form'
                         ? 'bg-white bg-opacity-20 text-white shadow-lg backdrop-blur-sm'
                         : 'text-white text-opacity-70 hover:text-white hover:bg-white hover:bg-opacity-10'
@@ -98,7 +98,7 @@ export default function Home() {
                   
                   <button
                     onClick={() => setActiveTab('preview')}
-                    className={`w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    className={`w-1/10 flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                       activeTab === 'preview'
                         ? 'bg-white bg-opacity-20 text-white shadow-lg backdrop-blur-sm'
                         : 'text-white text-opacity-70 hover:text-white hover:bg-white hover:bg-opacity-10'
@@ -110,7 +110,7 @@ export default function Home() {
                   
                   <button
                     onClick={() => setActiveTab('download')}
-                    className={`w-full flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    className={`w-1/10 flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                       activeTab === 'download'
                         ? 'bg-white bg-opacity-20 text-white shadow-lg backdrop-blur-sm'
                         : 'text-white text-opacity-70 hover:text-white hover:bg-white hover:bg-opacity-10'
@@ -120,8 +120,7 @@ export default function Home() {
                     导出简历
                   </button>
                 </div>
-                
-                {/* 状态信息 */}
+              
                 <div className="mt-8 pt-6 border-t border-white border-opacity-20">
                   <div className="text-white text-opacity-80 text-sm">
                     <div className="flex items-center mb-2">
@@ -137,10 +136,10 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             
             {/* 右侧：内容区域 */}
-            <div className="lg:col-span-3">
+            <div className="w-full md:w-3/4">
               {activeTab === 'form' ? (
                 <ResumeForm onSubmit={handleFormSubmit} />
               ) : (
