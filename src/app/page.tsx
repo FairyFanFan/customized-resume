@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Eye, Download, Settings } from 'lucide-react';
+import { Eye, Download } from 'lucide-react';
 import Header from '@/components/Header';
 import ResumeForm from '@/components/ResumeForm';
 import ResumePreview from '@/components/ResumePreview';

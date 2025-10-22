@@ -1,13 +1,13 @@
 'use client';
 
-import { FileText } from 'lucide-react';
-
 interface HeaderProps {
   activeTab: 'form' | 'preview' | 'download';
   onTabChange: (tab: 'form' | 'preview' | 'download') => void;
 }
 
 export default function Header({ activeTab, onTabChange }: HeaderProps) {
+  // 这些参数暂时未使用，但保留以备将来功能扩展
+  console.log('Header props:', { activeTab, onTabChange });
 
   return (
     <header className=" mx-4 mt-4 mb-8">

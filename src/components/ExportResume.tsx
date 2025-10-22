@@ -131,7 +131,7 @@ export default function ExportResume({ resumeData }: ExportResumeProps) {
           >
             <div className="text-center text-white">
               <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white group-hover:bg-opacity-30 transition-colors">
-                <Image className="h-8 w-8" />
+                <Image className="h-8 w-8" aria-label="导出图片图标" />
               </div>
               <h3 className="text-xl font-bold mb-2">导出为图片</h3>
               <p className="text-green-100">生成PNG图片，适合在线分享</p>
