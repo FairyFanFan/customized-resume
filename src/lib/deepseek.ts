@@ -75,6 +75,8 @@ class DeepSeekService {
         // 提供更友好的错误信息
         if (response.status === 401) {
           errorMessage = 'API密钥无效，请检查配置。运行 ./fix-api-key.sh 重新配置';
+        } else if (response.status === 402) {
+          errorMessage = '账户余额不足，请充值后重试';
         } else if (response.status === 429) {
           errorMessage = '请求频率过高，请稍后重试';
         } else if (response.status >= 500) {
