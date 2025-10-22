@@ -27,6 +27,11 @@ class DeepSeekService {
 
   constructor(apiKey?: string) {
     this.apiKey = apiKey || process.env.NEXT_PUBLIC_DEEPSEEK_API_KEY || '';
+    
+    // 开发环境下的临时API密钥（请替换为您的真实密钥）
+    if (!this.apiKey && process.env.NODE_ENV === 'development') {
+      this.apiKey = 'sk-your-deepseek-api-key-here';
+    }
   }
 
   /**
