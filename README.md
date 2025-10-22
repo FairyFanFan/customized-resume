@@ -9,6 +9,7 @@ A modern resume generation website based on Next.js + React, helping users quick
 ## Features / 功能特性
 
 - 📝 **Smart Form / 智能表单** - Step-by-step form for personal info, work experience, education, etc. / 分步骤填写个人信息、工作经历、教育背景等
+- 🤖 **AI Optimization / AI优化** - Powered by DeepSeek API for intelligent resume optimization / 集成DeepSeek API，智能优化简历内容
 - 👀 **Real-time Preview / 实时预览** - Instant resume preview with WYSIWYG / 即时查看简历效果，所见即所得
 - 📄 **Multi-format Export / 多格式导出** - Export as PDF and PNG image formats / 支持导出为PDF和PNG图片格式
 - 🎨 **Modern Design / 现代设计** - Clean and beautiful interface with responsive layout / 简洁美观的界面设计，响应式布局
@@ -82,6 +83,56 @@ The resume adopts a modern design style, including the following sections:
 - Education Background / 教育背景
 - Skills Tags / 技能标签
 - Project Experience / 项目经历
+
+## Configuration / 配置
+
+### DeepSeek API Setup / DeepSeek API 配置
+
+1. **获取API密钥**：
+   - 访问 [DeepSeek开发者平台](https://platform.deepseek.com/)
+   - 注册并创建API密钥
+
+2. **配置环境变量**：
+   ```bash
+   # 创建 .env.local 文件
+   NEXT_PUBLIC_DEEPSEEK_API_KEY=your_api_key_here
+   ```
+
+3. **快速配置**：
+   ```bash
+   # 使用配置脚本
+   ./setup-deepseek.sh
+   ```
+
+详细配置请参考：[DeepSeek集成指南](DEEPSEEK_INTEGRATION.md)
+
+## Deployment / 部署
+
+### 自动部署（GitHub Actions）
+
+1. **配置GitHub Secrets**：
+   - `VERCEL_TOKEN` - Vercel API Token
+   - `VERCEL_ORG_ID` - Vercel Organization ID  
+   - `VERCEL_PROJECT_ID` - Vercel Project ID
+
+2. **详细配置**：
+   参考 [部署指南](DEPLOYMENT_GUIDE.md)
+
+### 手动部署
+
+```bash
+# 使用部署助手
+./deploy-helper.sh
+
+# 或直接部署
+npm run build
+vercel --prod
+```
+
+### Vercel环境变量
+
+在Vercel Dashboard中配置：
+- `NEXT_PUBLIC_DEEPSEEK_API_KEY` - DeepSeek API密钥
 
 ## Development Notes / 开发说明
 
