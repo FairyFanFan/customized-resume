@@ -15,6 +15,7 @@ type ResumeFormData = {
     requirements?: string;
   };
   aiModel: string;
+  optimizedContent?: string;
 };
 
 export default function Home() {

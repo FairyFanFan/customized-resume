@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Settings } from 'lucide-react';
+import { Settings, Loader2 } from 'lucide-react';
+import { useState } from 'react';
 
 const resumeSchema = z.object({
   personalInfo: z.object({
@@ -16,10 +17,13 @@ const resumeSchema = z.object({
 export type ResumeFormData = z.infer<typeof resumeSchema>;
 
 interface ResumeFormProps {
-  onSubmit: (data: ResumeFormData) => void;
+  onSubmit: (data: ResumeFormData & { optimizedContent?: string }) => void;
 }
 
 export default function ResumeForm({ onSubmit }: ResumeFormProps) {
+  const [isOptimizing, setIsOptimizing] = useState(false);
+  const [optimizationError, setOptimizationError] = useState<string | null>(null);
+  
   const {
     register,
     handleSubmit,
@@ -36,6 +40,47 @@ export default function ResumeForm({ onSubmit }: ResumeFormProps) {
     },
   });
 
+
+  const handleFormSubmit = async (data: ResumeFormData) => {
+    setIsOptimizing(true);
+    setOptimizationError(null);
+
+    try {
+      // 调用AI优化API
+      const response = await fetch('/api/optimize-resume', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          personalInfo: data.personalInfo.name,
+          targetJob: data.targetJob.requirements,
+          model: data.aiModel,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // 将优化后的内容传递给父组件
+        onSubmit({
+          ...data,
+          optimizedContent: result.data.optimizedResume,
+        });
+      } else {
+        throw new Error(result.error || '优化失败');
+      }
+    } catch (error) {
+      console.error('AI优化失败:', error);
+      setOptimizationError(error instanceof Error ? error.message : '优化失败，请重试');
+      
+      // 即使优化失败，也允许用户继续
+      onSubmit(data);
+    } finally {
+      setIsOptimizing(false);
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-8">
    
@@ -49,7 +94,7 @@ export default function ResumeForm({ onSubmit }: ResumeFormProps) {
             </h2>
           </div>
           
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-8">
             {/* 个人信息 */}
             <div className="floating-card">
               <h2 className="text-xl font-semibold mb-6 text-gray-800 flex items-center">
@@ -122,12 +167,33 @@ export default function ResumeForm({ onSubmit }: ResumeFormProps) {
               </div>
             </div>
 
+            {/* 错误提示 */}
+            {optimizationError && (
+              <div className="floating-card border-l-4 border-red-500 bg-red-50">
+                <div className="text-red-700">
+                  <h3 className="font-semibold mb-2">⚠️ AI优化失败</h3>
+                  <p className="text-sm">{optimizationError}</p>
+                  <p className="text-sm mt-2">您可以继续使用原始内容生成简历。</p>
+                </div>
+              </div>
+            )}
+
             <div className="flex justify-center pt-8">
               <button
                 type="submit"
-                className="gradient-button text-lg px-8 py-4 shadow-2xl hover:shadow-3xl"
+                disabled={isOptimizing}
+                className={`gradient-button text-lg px-8 py-4 shadow-2xl hover:shadow-3xl ${
+                  isOptimizing ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
-                ✨ 生成简历预览
+                {isOptimizing ? (
+                  <>
+                    <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                    AI正在优化中...
+                  </>
+                ) : (
+                  '✨ 生成简历预览'
+                )}
               </button>
             </div>
           </form>

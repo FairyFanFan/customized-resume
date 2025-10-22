@@ -2,11 +2,11 @@ import { ResumeFormData } from './ResumeForm';
 import { Eye } from 'lucide-react';
 
 interface ResumePreviewProps {
-  data: ResumeFormData;
+  data: ResumeFormData & { optimizedContent?: string };
 }
 
 export default function ResumePreview({ data }: ResumePreviewProps) {
-  const { personalInfo, targetJob, aiModel } = data;
+  const { personalInfo, targetJob, aiModel, optimizedContent } = data;
 
   // 解析个人信息文本
   const parsePersonalInfo = (infoText: string) => {
@@ -104,6 +104,24 @@ export default function ResumePreview({ data }: ResumePreviewProps) {
             </div>
           )}
 
+          {/* AI优化后的内容 */}
+          {optimizedContent && (
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4 border-l-4 border-blue-600 pl-3">
+                AI优化后的简历内容
+              </h2>
+              <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-6">
+                <div className="bg-white rounded-lg p-6 border border-gray-200">
+                  <div className="prose max-w-none">
+                    <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
+                      {optimizedContent}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* AI模型信息 */}
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-4 border-l-4 border-purple-600 pl-3">
@@ -122,6 +140,9 @@ export default function ResumePreview({ data }: ResumePreviewProps) {
                   <div className="flex flex-wrap gap-2">
                     <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">智能优化</span>
                     <span className="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">内容生成</span>
+                    {optimizedContent && (
+                      <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">已优化</span>
+                    )}
                   </div>
                 </div>
               </div>
