@@ -70,7 +70,18 @@ class DeepSeekService {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(`API请求失败: ${errorData.error?.message || response.statusText}`);
+        let errorMessage = `API请求失败: ${errorData.error?.message || response.statusText}`;
+        
+        // 提供更友好的错误信息
+        if (response.status === 401) {
+          errorMessage = 'API密钥无效，请检查配置。运行 ./fix-api-key.sh 重新配置';
+        } else if (response.status === 429) {
+          errorMessage = '请求频率过高，请稍后重试';
+        } else if (response.status >= 500) {
+          errorMessage = '服务器错误，请稍后重试';
+        }
+        
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
